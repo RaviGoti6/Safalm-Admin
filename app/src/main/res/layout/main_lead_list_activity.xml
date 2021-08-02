@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainLeadListActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="#e6e6e6"
+           android:padding="5dp">
+
+            <TextView
+                android:layout_width="275dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Company Lead"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <ListView
+
+            android:id="@+id/listCompanyLeadList"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:divider="#d4d4d4"
+            android:dividerHeight="1dp">
+
+        </ListView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

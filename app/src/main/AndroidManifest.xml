@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.raju.safalmadmin">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".SafalmAdmin"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:theme="@style/AppTheme">
+        <activity android:name=".EmployeeListActivity" />
+        <activity android:name=".GiveTargetActivity" />
+        <activity android:name=".GiveProductActivity" />
+        <activity android:name=".LeadListActivity" />
+        <activity android:name=".EmployeeSide.EmployeeOpportunityListActivity" />
+        <activity android:name=".EmployeeSide.EmployeeDashboardActivity" />
+        <activity android:name=".EmployeeSide.EmployeeLeadActivity" />
+        <activity android:name=".EmployeeSide.EmployeeLeadTransferEmployeeListActivity" />
+        <activity android:name=".EmployeeSide.EmployeeAddCompanyLeadActivity" />
+        <activity android:name=".EmployeeSide.EmployeeSelfLeadListActivity" />
+        <activity android:name=".EmployeeSide.EmployeeProductListMainActvity" />
+        <activity android:name=".EmployeeSide.EmployeeSelfSalesLeadListActivity" />
+        <activity android:name=".EmployeeSide.EmployeeEditCompanyLeadActivity" />
+        <activity android:name=".EmployeeSide.EmployeeSelfSalesLeadDetailActivity" />
+        <activity android:name=".EmployeeSide.EmployeeSelfLeadDetailActivity" />
+        <activity android:name=".EmployeeSide.EmployeeCompanyLeadListActivity" />
+        <activity android:name=".EmployeeSide.EmployeeCompanyLeadDetailActivity" />
+        <activity android:name=".EmployeeSide.EmployeeCompanyVisitedLeadListActivity" />
+        <activity android:name=".EmployeeSide.EmployeeCompanyVisitedLeadDetailActivity" />
+        <activity android:name=".EmployeeSide.EmployeeLeadTransferLeadDetailActivity" />
+        <activity android:name=".EmployeeSide.EmployeeLeadTransferDetailActivity" />
+        <activity android:name=".EmployeeSide.EmployeeLeadTransferActivity" />
+        <activity android:name=".EmployeeSide.EmployeeAddCompanyVisitedLeadToSalesActivity" />
+        <activity android:name=".EmployeeSide.EmployeeCompanySalesLeadListActivity" />
+        <activity android:name=".EmployeeSide.EmployeeCompanySalesLeadDetailActivity" />
+        <activity android:name=".EmployeeSide.EmployeeAddCompanyLeadToVisitedAndSalesActivity" />
+        <activity android:name=".EmployeeSide.EmployeeAddCompanyLeadToSalesActivity" />
+        <activity android:name=".EmployeeSide.EmployeeSelfVisitedLeadListActivity" />
+        <activity android:name=".EmployeeSide.EmployeeTaskListActivity" />
+        <activity android:name=".EmployeeSide.EmployeeEditSelfSalesLeadActivity" />
+        <activity android:name=".EmployeeSide.EmployeeTaskDetailActivity" />
+        <activity android:name=".EmployeeSide.EmployeeTargetListActivity" />
+        <activity android:name=".MainSalesLeadListActivity" />
+        <activity android:name=".MainVisitedLeadListActivity" />
+        <activity android:name=".MainLeadListActivity" />
+        <activity android:name=".MainLeadDetailActivity" />
+        <activity android:name=".MainVisitedLeadDetailActivity" />
+        <activity android:name=".MainSalesLeadDetailActivity" />
+        <activity android:name=".EmployeeSide.EmployeeSelfVisitedLeadDetailActivity" />
+        <activity android:name=".AdminDashboardActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".EmployeeSide.EmployeeDetailActivity" />
+        <activity android:name=".EmployeeWorkDetailActivity" />
+        <activity android:name=".EmployeeListMainActivity" />
+        <activity android:name=".AddEmployeeActivity" />
+        <activity android:name=".EmployeeSide.EmployeeEditVisitedLeadActivity" />
+        <activity android:name=".EmployeeSide.EmployeeEditSelfLeadActivity" />
+        <activity android:name=".EmployeeSide.EmployeeAddSelfLeadActivity" />
+        <activity android:name=".EmployeeSide.EmployeeLeadAddToTaskActivity" />
+        <activity android:name=".EmployeeSide.EmployeeAddSelfVisitedLeadToSalesActivity" />
+        <activity android:name=".EmployeeSide.EmployeeAddSelfLeadToVisitedAndSalesActivity" />
+        <activity android:name=".EmployeeSide.EmployeeAddSelfLeadToSalesActivity" />
+        <activity android:name=".EditEmployeeDetailActivity" />
+        <activity android:name=".LeadActivity" />
+        <activity
+            android:name=".EmployeeSide.EmployeeProductListActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+
+        <receiver android:name=".MyBroadcast">
+            <intent-filter>
+                <action android:name="android.media.action.DISPLAY_NOTIFICATION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".AdminReportActivity"></activity>
+        <activity android:name=".EmployeeSide.EmployeeGiveOpportunityActivity" />
+    </application>
+
+</manifest>
