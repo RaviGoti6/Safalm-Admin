@@ -127,6 +127,16 @@ public class EmployeeLeadAddToTaskActivity extends AppCompatActivity {
             clid = (String) b.get("clid");
             cvlid = (String) b.get("cvlid");
 
+            if (slid == null)
+                slid = "0";
+            if (clid == null)
+                clid = "0";
+            if (vlid == null)
+                vlid = "0";
+            if (cvlid == null)
+                cvlid = "0";
+            if (cmpTask == null)
+                cmpTask = "0";
             //txtSLDname.setText(lead_id);
         }
 
