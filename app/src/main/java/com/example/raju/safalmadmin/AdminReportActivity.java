@@ -112,7 +112,7 @@ public class AdminReportActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
                         date_to = ((year + "-" + (((month + 1) < 10) ? "0" + (month + 1) : (month + 1)) + "-" + ((dayOfMonth < 10) ? "0" + dayOfMonth : dayOfMonth)));
-                        txtToDate.setText(date_to   );
+                        txtToDate.setText(date_to);
                         Toast.makeText(AdminReportActivity.this, date_to, Toast.LENGTH_SHORT).show();
                         onResume();
                     }

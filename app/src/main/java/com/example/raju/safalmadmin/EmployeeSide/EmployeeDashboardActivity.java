@@ -52,7 +52,7 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
     HashMap<String, String> contacts;
 
     ListView lstTask;
-    String currentDate, emp_name, email = "rajesh3233@gmai.com";
+    String currentDate, emp_name, email = "ravigoti6@gmai.com";
 
     ListView list;
 
@@ -61,6 +61,7 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
 
     AsyncTask at;
     int flag = 0;
+    private boolean tFlag;
 
     ArrayList<HashMap<String, String>> leadList;
 
@@ -175,8 +176,18 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(EmployeeDashboardActivity.this, EmployeeOpportunityListActivity.class));
             }
         });
+    }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (flag > 0) {
+            lstTask = findViewById(R.id.lstTask);
+            url = "http://10.0.2.2/safalm/get_emp_from_id.php?id=" + eid + "&cur_date=" + currentDate;
+            leadList.clear();
+            lstTask.setAdapter(null);
+            at = new EmployeeDashboardActivity.Employee().execute();
+        }
     }
 
     private void openSMS() {
@@ -271,34 +282,36 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
             if (tid == null) {
                 Toast.makeText(EmployeeDashboardActivity.this, "Task id: " + tid, Toast.LENGTH_SHORT).show();
             } else {
-                adptr = new SimpleAdapter(EmployeeDashboardActivity.this, leadList, R.layout.task_list_item_dashboard, new String[]{"task_id", TAG_SLNAME, TAG_SLCONTACT, "task_type"}, new int[]{R.id.txtTLIid, R.id.txtTLIname, R.id.txtTLImobile, R.id.txtTLItasktype}) {
+                if (tFlag) {
+                    adptr = new SimpleAdapter(EmployeeDashboardActivity.this, leadList, R.layout.task_list_item_dashboard, new String[]{"task_id", TAG_SLNAME, TAG_SLCONTACT, "task_type"}, new int[]{R.id.txtTLIid, R.id.txtTLIname, R.id.txtTLImobile, R.id.txtTLItasktype}) {
 
-                    @Override
-                    public View getView(int position, View convertView, ViewGroup parent) {
+                        @Override
+                        public View getView(int position, View convertView, ViewGroup parent) {
 
-                        View v = super.getView(position, convertView, parent);
+                            View v = super.getView(position, convertView, parent);
 
-                        TextView tasktype = v.findViewById(R.id.txtTLItasktype);
-                        ImageView img = v.findViewById(R.id.imgTLIcall);
+                            TextView tasktype = v.findViewById(R.id.txtTLItasktype);
+                            ImageView img = v.findViewById(R.id.imgTLIcall);
 
-                        if (tasktype.getText().toString().equals("Call")) {
-                            img.setImageResource(R.drawable.call);
+                            if (tasktype.getText().toString().equals("Call")) {
+                                img.setImageResource(R.drawable.call);
+                            }
+                            if (tasktype.getText().toString().equals("SMS")) {
+                                img.setImageResource(R.drawable.sms);
+                            }
+
+                            if (tasktype.getText().toString().equals("Mail")) {
+                                img.setImageResource(R.drawable.mail);
+                            }
+
+                            if (tasktype.getText().toString().equals("WhatsApp")) {
+                                img.setImageResource(R.drawable.whatsapp);
+                            }
+                            return v;
                         }
-                        if (tasktype.getText().toString().equals("SMS")) {
-                            img.setImageResource(R.drawable.sms);
-                        }
-
-                        if (tasktype.getText().toString().equals("Mail")) {
-                            img.setImageResource(R.drawable.mail);
-                        }
-
-                        if (tasktype.getText().toString().equals("WhatsApp")) {
-                            img.setImageResource(R.drawable.whatsapp);
-                        }
-                        return v;
-                    }
-                };
-                lstTask.setAdapter(adptr);
+                    };
+                    lstTask.setAdapter(adptr);
+                }
             }
 
             pDialog.dismiss();
@@ -336,6 +349,8 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
                             Log.e("SAFALM33=", success);
                             Log.e("SAFALM44=", message);
 
+                            tFlag = false;
+
                             String emp_name = c.getString("emp_name");
 
                             HashMap<String, String> map = new HashMap<>();
@@ -349,6 +364,7 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
 
                             String success = jsonObj.getString("success");
                             String message = jsonObj.getString("message");
+                            tFlag = true;
                             // Log.e("SAFALM3=", success);
                             //Log.e("SAFALM4=", message);
                             //Toast.makeText(getApplicationContext(), success + message, Toast.LENGTH_SHORT).show();

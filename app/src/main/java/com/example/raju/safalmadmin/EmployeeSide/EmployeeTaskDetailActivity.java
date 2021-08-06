@@ -111,8 +111,9 @@ public class EmployeeTaskDetailActivity extends AppCompatActivity {
 
                 url = "http://10.0.2.2/safalm/delete_task.php?task_id=" + task_id;
                 at = new EmployeeTaskDetailActivity.Employee().execute();
-                Intent i=new Intent(EmployeeTaskDetailActivity.this,EmployeeTaskDetailActivity.class);
-                startActivity(i);
+                //Intent i=new Intent(EmployeeTaskDetailActivity.this,EmployeeTaskListActivity.class);
+                //startActivity(i);
+                finish();
 
             }
         });

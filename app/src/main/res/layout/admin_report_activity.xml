@@ -67,7 +67,7 @@
                     android:background="#ffffff"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="2019-01-01"
+                    android:text="YYYY-MM-DD"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18dp" />
@@ -81,7 +81,7 @@
                     android:background="#ffffff"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="2020-01-01"
+                    android:text="YYYY-MM-DD"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18dp" />
