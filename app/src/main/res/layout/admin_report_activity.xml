@@ -156,7 +156,7 @@
                                 android:layout_height="match_parent"
                                 android:background=" #ffffff"
                                 android:gravity="center"
-                                android:text="Self Product Sale"
+                                android:text="Total Self Product Sale"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="14dp" />
                         </RelativeLayout>
@@ -219,7 +219,7 @@
                                 android:layout_height="match_parent"
                                 android:background=" #ffffff"
                                 android:gravity="center"
-                                android:text="Company Product Sale"
+                                android:text="Total Company Product Sale"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="14dp" />
                         </RelativeLayout>
@@ -293,7 +293,7 @@
                                 android:layout_height="match_parent"
                                 android:background=" #ffffff"
                                 android:gravity="center"
-                                android:text="Self Visited Sale"
+                                android:text="Total Self Visited Leads"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="14dp" />
                         </RelativeLayout>
@@ -356,7 +356,7 @@
                                 android:layout_height="match_parent"
                                 android:background=" #ffffff"
                                 android:gravity="center"
-                                android:text="Company Visited Sale"
+                                android:text="Total Company Visited Leads"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="14dp" />
                         </RelativeLayout>
@@ -429,7 +429,7 @@
                                 android:layout_height="match_parent"
                                 android:background=" #ffffff"
                                 android:gravity="center"
-                                android:text="Self Sales Sale"
+                                android:text="Total Self Sales Leads"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="14dp" />
                         </RelativeLayout>
@@ -492,7 +492,7 @@
                                 android:layout_height="match_parent"
                                 android:background=" #ffffff"
                                 android:gravity="center"
-                                android:text="Company Sales Sale"
+                                android:text="Total Company Sales Leads"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="14dp" />
                         </RelativeLayout>

@@ -21,7 +21,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 public class AdminReportActivity extends AppCompatActivity {
@@ -30,6 +32,7 @@ public class AdminReportActivity extends AppCompatActivity {
     Button btnToDate, btnFromDate;
     int mDate, mMonth, mYear, mMinute, mHour;
     String date_time, dt, tm, date_from, date_to, self_p_qn, comp_p_qn, self_visited, comp_visited, self_sales, comp_sales;
+    String currentDate;
 
     SafalmAdmin sa;
 
@@ -68,8 +71,15 @@ public class AdminReportActivity extends AppCompatActivity {
         txtToDate = findViewById(R.id.txtToDate);
         txtFromDate = findViewById(R.id.txtFromDate);
 
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        currentDate = df.format(c);
+
         date_from = "2019-01-01";
-        date_to = "2020-01-01";
+        date_to = currentDate;
+
+        txtFromDate.setText(date_from);
+        txtToDate.setText(currentDate);
 
         btnFromDate.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -110,7 +110,7 @@ public class EmployeeCompanySalesLeadListActivity extends AppCompatActivity {
         protected void onPostExecute(Void s) {
             super.onPostExecute(s);
 
-            adptr = new SimpleAdapter(EmployeeCompanySalesLeadListActivity.this, leadList, R.layout.employee_visited_lead_list_item, new String[]{TAG_VLID, TAG_VLNAME, TAG_VLADDRESS, TAG_VLCONTACT, TAG_VLDATE,"product"}, new int[]{R.id.txtVLLIid, R.id.txtVLLIname, R.id.txtVLLIaddress, R.id.txtVLLImobile, R.id.txtVLLIdate,R.id.txtVLLIproduct});
+            adptr = new SimpleAdapter(EmployeeCompanySalesLeadListActivity.this, leadList, R.layout.sales_lead_list_item, new String[]{TAG_VLID, TAG_VLNAME, TAG_VLADDRESS, TAG_VLCONTACT, TAG_VLDATE,"product"}, new int[]{R.id.txtVLLIid, R.id.txtVLLIname, R.id.txtVLLIaddress, R.id.txtVLLImobile, R.id.txtVLLIdate,R.id.txtVLLIproduct});
             list.setAdapter(adptr);
 
             //  if (contacts.get("success").toString().equals("1")) {

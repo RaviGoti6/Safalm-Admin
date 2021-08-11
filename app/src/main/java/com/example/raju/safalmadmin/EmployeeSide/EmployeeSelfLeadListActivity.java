@@ -3,15 +3,19 @@ package com.example.raju.safalmadmin.EmployeeSide;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.raju.safalmadmin.HttpHandler;
@@ -126,7 +130,38 @@ public class EmployeeSelfLeadListActivity extends AppCompatActivity {
             super.onPostExecute(s);
 
 
-            adptr = new SimpleAdapter(EmployeeSelfLeadListActivity.this, leadList, R.layout.employee_self_lead_list_item, new String[]{TAG_SLID, TAG_SLNAME, TAG_SLADDRESS, TAG_SLCONTACT}, new int[]{R.id.txtSLLIid, R.id.txtSLLIname, R.id.txtSLLIaddress, R.id.txtSLLImobile});
+            adptr = new SimpleAdapter(EmployeeSelfLeadListActivity.this, leadList, R.layout.self_lead_list_item, new String[]{TAG_SLID, TAG_SLNAME, TAG_SLADDRESS, TAG_SLCONTACT, "s_task", "s_visited", "s_sales"}, new int[]{R.id.txtSLLIid, R.id.txtSLLIname, R.id.txtSLLIaddress, R.id.txtSLLImobile, R.id.s_task, R.id.s_visited, R.id.s_sales}) {
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+
+                    View v = super.getView(position, convertView, parent);
+
+                    LinearLayout l_task = v.findViewById(R.id.icStatusTask);
+                    LinearLayout l_visited = v.findViewById(R.id.icStatusVisit);
+                    LinearLayout l_sales = v.findViewById(R.id.icStatusSales);
+                    TextView t_task = v.findViewById(R.id.s_task);
+                    TextView t_visited = v.findViewById(R.id.s_visited);
+                    TextView t_sales = v.findViewById(R.id.s_sales);
+                    // l_task.setBackgroundColor(Color.parseColor("#000000"));
+                    if (t_task.getText().toString().equals("T")) {
+                        l_task.setBackground(getResources().getDrawable(R.drawable.task_status));
+                    } else {
+                        l_task.setBackground(getResources().getDrawable(R.drawable.status_none));
+                    }
+                    if (t_visited.getText().toString().equals("V")) {
+                        l_visited.setBackground(getResources().getDrawable(R.drawable.visited_status));
+                    } else {
+                        l_visited.setBackground(getResources().getDrawable(R.drawable.status_none));
+                    }
+                    if (t_sales.getText().toString().equals("S")) {
+                        l_sales.setBackground(getResources().getDrawable(R.drawable.sales_status));
+                    } else {
+                        l_sales.setBackground(getResources().getDrawable(R.drawable.status_none));
+                    }
+
+                    return v;
+                }
+            };
             list.setAdapter(adptr);
 
 
@@ -169,6 +204,9 @@ public class EmployeeSelfLeadListActivity extends AppCompatActivity {
                         String name = c.getString(TAG_SLNAME);
                         String address = c.getString(TAG_SLADDRESS);
                         String contact = c.getString(TAG_SLCONTACT);
+                        String s_task = c.getString("lead_task_status");
+                        String s_visit = c.getString("lead_visited_status");
+                        String s_sales = c.getString("lead_sales_status");
 
                         HashMap<String, String> map = new HashMap<>();
 
@@ -176,6 +214,9 @@ public class EmployeeSelfLeadListActivity extends AppCompatActivity {
                         map.put(TAG_SLNAME, name);
                         map.put(TAG_SLADDRESS, address);
                         map.put(TAG_SLCONTACT, contact);
+                        map.put("s_task", s_task);
+                        map.put("s_visited", s_visit);
+                        map.put("s_sales", s_sales);
 
                         leadList.add(map);
                     }

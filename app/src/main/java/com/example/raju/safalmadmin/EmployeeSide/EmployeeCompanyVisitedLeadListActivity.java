@@ -3,14 +3,19 @@ package com.example.raju.safalmadmin.EmployeeSide;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.raju.safalmadmin.HttpHandler;
@@ -27,7 +32,7 @@ import java.util.StringTokenizer;
 
 public class EmployeeCompanyVisitedLeadListActivity extends AppCompatActivity {
 
-    String empid,date;
+    String empid, date;
     ListAdapter adptr;
 
     ListView list;
@@ -54,7 +59,7 @@ public class EmployeeCompanyVisitedLeadListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.employee_company_visited_lead_list_activity);
 
-        list=findViewById(R.id.listCompanyVisitedLeadList);
+        list = findViewById(R.id.listCompanyVisitedLeadList);
 
         sa = (SafalmAdmin) getApplicationContext();
         empid = sa.getempId();
@@ -112,7 +117,31 @@ public class EmployeeCompanyVisitedLeadListActivity extends AppCompatActivity {
         protected void onPostExecute(Void s) {
             super.onPostExecute(s);
 
-            adptr = new SimpleAdapter(EmployeeCompanyVisitedLeadListActivity.this, leadList, R.layout.employee_visited_lead_list_item, new String[]{TAG_VLID, TAG_VLNAME, TAG_VLADDRESS, TAG_VLCONTACT, TAG_VLDATE,"product"}, new int[]{R.id.txtVLLIid, R.id.txtVLLIname, R.id.txtVLLIaddress, R.id.txtVLLImobile, R.id.txtVLLIdate,R.id.txtVLLIproduct});
+            adptr = new SimpleAdapter(EmployeeCompanyVisitedLeadListActivity.this, leadList, R.layout.visited_lead_list_item, new String[]{TAG_VLID, TAG_VLNAME, TAG_VLADDRESS, TAG_VLCONTACT, TAG_VLDATE, "product", "s_task", "s_sales"}, new int[]{R.id.txtVLLIid, R.id.txtVLLIname, R.id.txtVLLIaddress, R.id.txtVLLImobile, R.id.txtVLLIdate, R.id.txtVLLIproduct, R.id.s_task, R.id.s_sales}) {
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+
+                    View v = super.getView(position, convertView, parent);
+
+                    LinearLayout l_task = v.findViewById(R.id.icStatusTask);
+                    LinearLayout l_sales = v.findViewById(R.id.icStatusSales);
+                    TextView t_task = v.findViewById(R.id.s_task);
+                    TextView t_sales = v.findViewById(R.id.s_sales);
+                    // l_task.setBackgroundColor(Color.parseColor("#000000"));
+                    if (t_task.getText().toString().equals("T")) {
+                        l_task.setBackground(getResources().getDrawable(R.drawable.task_status));
+                    } else {
+                        l_task.setBackground(getResources().getDrawable(R.drawable.status_none));
+                    }
+                    if (t_sales.getText().toString().equals("S")) {
+                        l_sales.setBackground(getResources().getDrawable(R.drawable.sales_status));
+                    } else {
+                        l_sales.setBackground(getResources().getDrawable(R.drawable.status_none));
+                    }
+
+                    return v;
+                }
+            };
 
             list.setAdapter(adptr);
 
@@ -164,9 +193,11 @@ public class EmployeeCompanyVisitedLeadListActivity extends AppCompatActivity {
                         String contact = c.getString(TAG_VLCONTACT);
                         date = c.getString(TAG_VLDATE);
                         String product = c.getString("product");
+                        String s_task = c.getString("lead_task_status");
+                        String s_sales = c.getString("lead_sales_status");
 
                         StringTokenizer tokens = new StringTokenizer(date, " ");
-                        String d= tokens.nextToken();
+                        String d = tokens.nextToken();
                         // time = tokens.nextToken();
 
                         HashMap<String, String> map = new HashMap<>();
@@ -177,6 +208,8 @@ public class EmployeeCompanyVisitedLeadListActivity extends AppCompatActivity {
                         map.put(TAG_VLCONTACT, contact);
                         map.put(TAG_VLDATE, d);
                         map.put("product", product);
+                        map.put("s_task", s_task);
+                        map.put("s_sales", s_sales);
 
 
                         leadList.add(map);

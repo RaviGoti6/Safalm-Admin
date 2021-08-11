@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.AsyncTask;
 import android.os.Build;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,7 +52,7 @@ public class EmployeeCompanyLeadListActivity extends AppCompatActivity {
 
     String empid;
     ListAdapter adptr;
-    String TAG1 ="main";
+    String TAG1 = "main";
     private TextView textView;
     private ProgressDialog progressDialog;
     ListView list;
@@ -79,7 +82,7 @@ public class EmployeeCompanyLeadListActivity extends AppCompatActivity {
         setContentView(R.layout.employee_company_lead_list_activity);
 
         list = findViewById(R.id.listCompanyLeadList);
-        icAddLead=findViewById(R.id.icAddLead);
+        icAddLead = findViewById(R.id.icAddLead);
 
         imgUploadExcell = findViewById(R.id.imgUploadExcell);
 
@@ -101,7 +104,7 @@ public class EmployeeCompanyLeadListActivity extends AppCompatActivity {
                                 String filePath = file.getAbsolutePath();
 
                                 progressDialog.show();
-                                if (readExcelFileFromAssets(filePath)){
+                                if (readExcelFileFromAssets(filePath)) {
                                     progressDialog.dismiss();
                                     finish();
                                 }
@@ -114,7 +117,7 @@ public class EmployeeCompanyLeadListActivity extends AppCompatActivity {
         icAddLead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    startActivity(new Intent(EmployeeCompanyLeadListActivity.this,EmployeeAddCompanyLeadActivity.class));
+                startActivity(new Intent(EmployeeCompanyLeadListActivity.this, EmployeeAddCompanyLeadActivity.class));
             }
         });
 
@@ -183,35 +186,35 @@ public class EmployeeCompanyLeadListActivity extends AppCompatActivity {
             HSSFSheet mySheet = myWorkBook.getSheetAt(0);
             // We now need something to iterate through the cells.
             Iterator<Row> rowIter = mySheet.rowIterator();
-            int rowno =0;
+            int rowno = 0;
 //            textView.append("\n");
 //            textView.append(  "name  --  mobile   --  address -- \n");
             while (rowIter.hasNext()) {
-                Log.e(TAG1, " row no "+ rowno );
+                Log.e(TAG1, " row no " + rowno);
                 HSSFRow myRow = (HSSFRow) rowIter.next();
-                if(rowno !=0) {
+                if (rowno != 0) {
                     Iterator<Cell> cellIter = myRow.cellIterator();
-                    int colno =0;
-                    String name="", mobile="", address="",c_name="",email="",date="";
+                    int colno = 0;
+                    String name = "", mobile = "", address = "", c_name = "", email = "", date = "";
                     long lonVal = 0;
                     Double d = null;
                     while (cellIter.hasNext()) {
                         HSSFCell myCell = (HSSFCell) cellIter.next();
-                        if (colno==0){
+                        if (colno == 0) {
                             name = myCell.toString();
-                        }else if (colno==1){
+                        } else if (colno == 1) {
                             mobile = myCell.toString();
 
                             Double e1Val = myCell.getNumericCellValue();
                             BigDecimal bd = new BigDecimal(e1Val.toString());
                             lonVal = bd.longValue();
-                            mobile=String.valueOf(lonVal);
+                            mobile = String.valueOf(lonVal);
                             // d=Double.parseDouble(mobile);
-                        }else if (colno==2){
+                        } else if (colno == 2) {
                             address = myCell.toString();
-                        }else if (colno==3){
+                        } else if (colno == 3) {
                             c_name = myCell.toString();
-                        }else if (colno==4){
+                        } else if (colno == 4) {
                             email = myCell.toString();
                         }
 //                        else if (colno==5){
@@ -219,21 +222,21 @@ public class EmployeeCompanyLeadListActivity extends AppCompatActivity {
 //                        }
                         colno++;
                         Log.e(TAG, " Index :" + myCell.getColumnIndex() + " -- " + myCell.toString());
-                        Log.e("Name:",name);
+                        Log.e("Name:", name);
                         //  Log.e("Mobile:",d.toString());
-                        Log.e("Address:",address);
-                        Log.e("Comp_name:",c_name);
-                        Log.e("Email:",email);
+                        Log.e("Address:", address);
+                        Log.e("Comp_name:", c_name);
+                        Log.e("Email:", email);
                     }
                     url = "http://10.0.2.2/safalm_admin/add_comp_lead.php?lname=" + name + "&laddress=" + address + "&lmobile=" + mobile + "&emp_id=" + empid + "&lemail=" + email + "&lcompany_name=" + c_name + "&ldate=" + currentDateandTime;
                     new EmployeeCompanyLeadListActivity.Employee().execute();
-                  //  textView.append( name + " -- "+ mobile+ "  -- "+ address+"   --  "+ c_name+"  --   "+ email+"\n");
+                    //  textView.append( name + " -- "+ mobile+ "  -- "+ address+"   --  "+ c_name+"  --   "+ email+"\n");
                 }
                 rowno++;
             }
             return true;
         } catch (Exception e) {
-            Log.e(TAG, "error "+ e.toString());
+            Log.e(TAG, "error " + e.toString());
             return false;
         }
     }
@@ -259,7 +262,38 @@ public class EmployeeCompanyLeadListActivity extends AppCompatActivity {
             //   String eid=se.getempId().toString();
             //    Log.e("Safalam 6:",eid);
 
-            adptr = new SimpleAdapter(EmployeeCompanyLeadListActivity.this, leadList, R.layout.employee_self_lead_list_item, new String[]{TAG_SLID, TAG_SLNAME, TAG_SLADDRESS, TAG_SLCONTACT}, new int[]{R.id.txtSLLIid, R.id.txtSLLIname, R.id.txtSLLIaddress, R.id.txtSLLImobile});
+            adptr = new SimpleAdapter(EmployeeCompanyLeadListActivity.this, leadList, R.layout.self_lead_list_item, new String[]{TAG_SLID, TAG_SLNAME, TAG_SLADDRESS, TAG_SLCONTACT, "s_task", "s_visited", "s_sales"}, new int[]{R.id.txtSLLIid, R.id.txtSLLIname, R.id.txtSLLIaddress, R.id.txtSLLImobile, R.id.s_task, R.id.s_visited, R.id.s_sales}) {
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+
+                    View v = super.getView(position, convertView, parent);
+
+                    LinearLayout l_task = v.findViewById(R.id.icStatusTask);
+                    LinearLayout l_visited = v.findViewById(R.id.icStatusVisit);
+                    LinearLayout l_sales = v.findViewById(R.id.icStatusSales);
+                    TextView t_task = v.findViewById(R.id.s_task);
+                    TextView t_visited = v.findViewById(R.id.s_visited);
+                    TextView t_sales = v.findViewById(R.id.s_sales);
+                    // l_task.setBackgroundColor(Color.parseColor("#000000"));
+                    if (t_task.getText().toString().equals("T")) {
+                        l_task.setBackground(getResources().getDrawable(R.drawable.task_status));
+                    } else {
+                        l_task.setBackground(getResources().getDrawable(R.drawable.status_none));
+                    }
+                    if (t_visited.getText().toString().equals("V")) {
+                        l_visited.setBackground(getResources().getDrawable(R.drawable.visited_status));
+                    } else {
+                        l_visited.setBackground(getResources().getDrawable(R.drawable.status_none));
+                    }
+                    if (t_sales.getText().toString().equals("S")) {
+                        l_sales.setBackground(getResources().getDrawable(R.drawable.sales_status));
+                    } else {
+                        l_sales.setBackground(getResources().getDrawable(R.drawable.status_none));
+                    }
+
+                    return v;
+                }
+            };
             list.setAdapter(adptr);
 
 
@@ -309,6 +343,9 @@ public class EmployeeCompanyLeadListActivity extends AppCompatActivity {
                         String name = c.getString(TAG_SLNAME);
                         String address = c.getString(TAG_SLADDRESS);
                         String contact = c.getString(TAG_SLCONTACT);
+                        String s_task = c.getString("lead_task_status");
+                        String s_visit = c.getString("lead_visited_status");
+                        String s_sales = c.getString("lead_sales_status");
 
                         HashMap<String, String> map = new HashMap<>();
 
@@ -316,6 +353,9 @@ public class EmployeeCompanyLeadListActivity extends AppCompatActivity {
                         map.put(TAG_SLNAME, name);
                         map.put(TAG_SLADDRESS, address);
                         map.put(TAG_SLCONTACT, contact);
+                        map.put("s_task", s_task);
+                        map.put("s_visited", s_visit);
+                        map.put("s_sales", s_sales);
 
                         leadList.add(map);
                     }
